@@ -14,7 +14,8 @@ struct Card
     internal var color : Colors
     internal var shade : Shades
     internal var shape : Shapes
-    internal var count : Int
+    internal var number : Numbers
+    
     
     internal var isMatched = false
     internal var isMisMatcehd = false
@@ -22,6 +23,14 @@ struct Card
     
     var description: String {
         return "\(color)\(shade),\(shape)"
+    }
+    
+    enum Numbers
+    {
+        case one
+        case two
+        case three
+        static var all = [Numbers.one, Numbers.two, Numbers.three]
     }
     
     enum Colors
@@ -51,6 +60,17 @@ struct Card
     func cardFace() -> String
     {
     var shape : String
+    var number : Int
+        
+    switch(self.number)
+        {
+        case .one:
+            number = 1
+        case .two:
+            number = 2
+        case .three:
+            number = 3
+        }
         
     switch(self.shape)
     {
@@ -61,7 +81,10 @@ struct Card
     case .square:
         shape = "■"
         }
-    return shape
+        var numOfShape = ""
+        for _ in 1...number{
+            numOfShape += shape    }
+    return numOfShape
         
     }
     

@@ -11,7 +11,7 @@ import UIKit
 class SetGameViewController: UIViewController {
 
 
-    var deck = Set()
+    var game = Set()
     @IBOutlet private var cardButtons: [UIButton]!
     @IBOutlet weak var scoreLabel: UILabel!
     
@@ -22,7 +22,7 @@ class SetGameViewController: UIViewController {
             {
                 
                 let button = cardButtons[index]
-                let card = deck.cards[index]
+                let card = game.cards[index]
                 button.setAttributedTitle(card.attributedContents(), for: .normal)
                 button.layer.cornerRadius = 5.0
                 button.layer.shadowColor = UIColor.black.cgColor
@@ -33,4 +33,17 @@ class SetGameViewController: UIViewController {
         
     }
     
+    @IBAction private func touchCard(_ sender: UIButton){
+        
+        if let cardNumber = cardButtons.firstIndex(of: sender)
+        {
+            game.chooseCard(at: cardNumber)
+        }
+        
+    }
+    
+    
+//    let button = cardButtons[cardNumber]
+//    button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//    button.layer.borderWidth = 1
 }
