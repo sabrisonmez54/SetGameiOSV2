@@ -18,7 +18,7 @@ struct Card
     
     
     internal var isMatched = false
-    internal var isMisMatcehd = false
+    internal var isMisMatched = false
     internal var isSelected = false
     
     var description: String {

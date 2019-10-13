@@ -11,56 +11,69 @@ import Foundation
 struct Set {
     
     private(set) var cards = [Card]()
+    var cardsInGame = [Card]()
     private(set) var selectedTrio = [Card]()
+    var score = 0
+    
 
     
     internal mutating func chooseCard(at index: Int)
-    {assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): Chosen index not valid")
-        if !cards[index].isMatched{
+    {assert(cardsInGame.indices.contains(index), "Concentration.chooseCard(at: \(index)): Chosen index not valid")
+        
+        if(!cardsInGame[index].isSelected){
             
-            self.selectedTrio.append(cards[index])
-            if(checkMatch(cards)){
-                selectedTrio.removeAll()
-                print("MATCH")
-            }else{
+            selectedTrio.append(cardsInGame[index])
+            
+            if(selectedTrio.count == 3), (checkMatch(selectedTrio)){
+                    
+                    cardsInGame[index].isMatched = true
+                
+                    selectedTrio.removeAll()
+                
+                    score = score + 3
+                
+                    print("MATCH")
+                
+                }else if selectedTrio.count == 3, !checkMatch(selectedTrio) {
+                
                 print("mismatch")
+                    
+                cardsInGame[index].isMisMatched = true
+                     score = score - 1
+                    
+                selectedTrio.removeAll()
+                
+                }
+        
+            
+            else{
+               
+                cardsInGame[index].isSelected = true
+                print("selected less than 3")
+                
             }
-            
         }
-      
-     
-        
-        
-    
     }
     
-    private func checkMatch(_ cards : [Card]) -> Bool {
-        if(selectedTrio.count == 3){
-            let first = cards[0]
-            let second = cards[1]
-            let third = cards[2]
-            
-            let numbersFeatures = [first.number, second.number, third.number]
-            let colorsFeatures = [first.color, second.color, third.color]
-            let symbolsFeatures = [first.shape, second.shape, third.shape]
-            let shadingsFeatures = [first.shade, second.shade, third.shade]
-            
-            return (numbersFeatures.count == 1 || numbersFeatures.count == 3) &&
-                (colorsFeatures.count == 1 || colorsFeatures.count == 3) &&
-                (symbolsFeatures.count == 1 || symbolsFeatures.count == 3) &&
-                (shadingsFeatures.count == 1 || shadingsFeatures.count == 3)
-        }else{
-            return false
-        }
-        
-    }
-
     init() {
+        newGame()
+    }
+    
+    mutating func newGame() {
+        score = 0
+        cards.removeAll()
+        cardsInGame.removeAll()
+        cards.removeAll()
+        generateCards()
+        addCards(numberOfCardsToAdd: 12)
+    }
+    
+    private mutating func generateCards() {
         for color in Card.Colors.all {
             for shape in Card.Shapes.all{
                 for number in Card.Numbers.all{
                     for shade in Card.Shades.all {
-                        let playingCard = Card(color: color, shade: shade, shape: shape, number: number, isMatched: false, isMisMatcehd: false, isSelected: false)
+                        let playingCard = Card(color: color, shade: shade, shape: shape, number: number, isMatched: false, isMisMatched: false, isSelected: false)
                         cards.append(playingCard)
                         cards.shuffle()
                     }
@@ -68,7 +81,69 @@ struct Set {
             }
         }
     }
-
+    
+    private mutating func addCard()
+    {
+        let randomInt = Int.random(in: 0..<cards.count)
+        let selectedCard = cards.remove(at: randomInt)
+        cardsInGame.append(selectedCard)
+    }
+    
+    mutating func addCards(numberOfCardsToAdd numberOfCards: Int)
+    {
+        for _ in 0..<numberOfCards
+        {
+            addCard()
+        }
+    }
+    
+    func checkMatch(_ selectedCards : [Card]) -> Bool
+    {
+        if selectedCards.count != 3 {
+            return false
+        }
+        
+        if selectedCards[0].color == selectedCards[1].color {
+            if selectedCards[0].color != selectedCards[2].color {
+                return false
+            }
+        } else if selectedCards[1].color == selectedCards[2].color {
+            return false
+        } else if (selectedCards[0].color == selectedCards[2].color) {
+            return false
+        }
+        
+        if selectedCards[0].number == selectedCards[1].number {
+            if selectedCards[0].number != selectedCards[2].number {
+                return false
+            }
+        } else if selectedCards[1].number == selectedCards[2].number {
+            return false
+        } else if (selectedCards[0].number == selectedCards[2].number) {
+            return false
+        }
+        
+        if selectedCards[0].shade == selectedCards[1].shade {
+            if selectedCards[0].shade != selectedCards[2].shade {
+                return false
+            }
+        } else if selectedCards[1].shade == selectedCards[2].shade {
+            return false
+        } else if (selectedCards[0].shade == selectedCards[2].shade) {
+            return false
+        }
+        
+        if selectedCards[0].shape == selectedCards[1].shape {
+            if selectedCards[0].shape != selectedCards[2].shape {
+                return false
+            }
+        } else if selectedCards[1].shape == selectedCards[2].shape {
+            return false
+        } else if (selectedCards[0].shape == selectedCards[2].shape) {
+            return false
+        }
+        return true
+    }
 }
 
 extension Int {

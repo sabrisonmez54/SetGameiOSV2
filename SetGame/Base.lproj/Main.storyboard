@@ -264,7 +264,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="HP2-Il-Pmu"/>
+                                            <action selector="newGameBtnClicked:" destination="CKz-We-tsR" eventType="touchUpInside" id="GbP-uA-fGn"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lso-bW-08A">
@@ -274,6 +274,9 @@
                                         <state key="normal" title="Deal 3 More">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="dealMoreBtnClicked:" destination="CKz-We-tsR" eventType="touchUpInside" id="Cty-PU-pwU"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -301,6 +304,8 @@
                         <viewLayoutGuide key="safeArea" id="U6j-lc-EAN"/>
                     </view>
                     <connections>
+                        <outlet property="dealMoreBtn" destination="lso-bW-08A" id="OFF-BT-dQN"/>
+                        <outlet property="newGameBtn" destination="pVv-nV-N4D" id="VD8-Yl-gmd"/>
                         <outlet property="scoreLabel" destination="YSa-h0-EqR" id="Sjv-8G-rWb"/>
                         <outletCollection property="cardButtons" destination="akU-g5-Vim" collectionClass="NSMutableArray" id="fkf-iN-JQW"/>
                         <outletCollection property="cardButtons" destination="Jsi-ae-OoJ" collectionClass="NSMutableArray" id="9hH-2Q-9w8"/>
@@ -321,7 +326,4 @@
             <point key="canvasLocation" x="865" y="100"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="ZXm-eg-Dru"/>
-    </inferredMetricsTieBreakers>
 </document>
