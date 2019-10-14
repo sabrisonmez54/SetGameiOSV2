@@ -21,7 +21,6 @@ class SetGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setBtns()
-        
     }
     
     func updateViewFromModel() {
@@ -61,7 +60,7 @@ class SetGameViewController: UIViewController {
                 
                                     button.layer.borderColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
                                     button.layer.borderWidth = 2
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
                     self.setBtns()
                     self.game.cardsInGame[cardNumber].isMatched = false
                     for i in 0..<self.game.cardsInGame.count{
@@ -86,7 +85,6 @@ class SetGameViewController: UIViewController {
         updateViewFromModel()
     }
     
-    
     @IBAction func newGameBtnClicked(_ sender: Any) {
         game.newGame()
         setBtns()
@@ -107,8 +105,5 @@ class SetGameViewController: UIViewController {
         }
        
     }
-    
-    
-    
-    
+   
 }

@@ -254,10 +254,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ozv-c9-VGC">
-                                <rect key="frame" x="16" y="675" width="150" height="100"/>
+                                <rect key="frame" x="16" y="625" width="150" height="150"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVv-nV-N4D">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="43.5"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="New Game">
@@ -268,7 +268,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lso-bW-08A">
-                                        <rect key="frame" x="0.0" y="55" width="150" height="45"/>
+                                        <rect key="frame" x="0.0" y="53.5" width="150" height="43"/>
                                         <color key="backgroundColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="0.87631100169999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Deal 3 More">
@@ -278,9 +278,20 @@
                                             <action selector="dealMoreBtnClicked:" destination="CKz-We-tsR" eventType="touchUpInside" id="Cty-PU-pwU"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0R-qE-N5k">
+                                        <rect key="frame" x="0.0" y="106.5" width="150" height="43.5"/>
+                                        <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="0.77563142119999995" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Home">
+                                            <color key="titleColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="qca-AA-S0z"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="GS3-AW-xob"/>
+                                    <constraint firstAttribute="height" constant="150" id="GS3-AW-xob"/>
                                     <constraint firstAttribute="width" constant="150" id="pcL-ju-zWs"/>
                                 </constraints>
                             </stackView>
@@ -298,7 +309,7 @@
                             <constraint firstItem="gK8-G4-yZ6" firstAttribute="leading" secondItem="U6j-lc-EAN" secondAttribute="leading" constant="16" id="UTW-wC-GUE"/>
                             <constraint firstItem="gK8-G4-yZ6" firstAttribute="top" secondItem="U6j-lc-EAN" secondAttribute="top" constant="20" id="db8-TV-KlS"/>
                             <constraint firstItem="U6j-lc-EAN" firstAttribute="trailing" secondItem="gK8-G4-yZ6" secondAttribute="trailing" constant="16" id="efR-8a-avZ"/>
-                            <constraint firstItem="Ozv-c9-VGC" firstAttribute="top" secondItem="gK8-G4-yZ6" secondAttribute="bottom" constant="350" id="m1f-HJ-sT8"/>
+                            <constraint firstItem="Ozv-c9-VGC" firstAttribute="top" secondItem="gK8-G4-yZ6" secondAttribute="bottom" constant="300" id="m1f-HJ-sT8"/>
                             <constraint firstItem="YSa-h0-EqR" firstAttribute="leading" secondItem="Ozv-c9-VGC" secondAttribute="trailing" constant="70" id="zpi-K4-aMy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="U6j-lc-EAN"/>
@@ -326,4 +337,7 @@
             <point key="canvasLocation" x="865" y="100"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="qca-AA-S0z"/>
+    </inferredMetricsTieBreakers>
 </document>
