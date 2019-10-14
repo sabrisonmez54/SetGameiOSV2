@@ -8,52 +8,13 @@
 
 import Foundation
 
-struct Set {
+struct Set
+{
     
     private(set) var cards = [Card]()
     var cardsInGame = [Card]()
     private(set) var selectedTrio = [Card]()
     var score = 0
-    
-
-    
-    internal mutating func chooseCard(at index: Int)
-    {assert(cardsInGame.indices.contains(index), "Concentration.chooseCard(at: \(index)): Chosen index not valid")
-        
-        if(!cardsInGame[index].isSelected){
-            
-            selectedTrio.append(cardsInGame[index])
-            
-            if(selectedTrio.count == 3), (checkMatch(selectedTrio)){
-                    
-                    cardsInGame[index].isMatched = true
-                
-                    selectedTrio.removeAll()
-                
-                    score = score + 3
-                
-                    print("MATCH")
-                
-                }else if selectedTrio.count == 3, !checkMatch(selectedTrio) {
-                
-                print("mismatch")
-                    
-                cardsInGame[index].isMisMatched = true
-                     score = score - 1
-                    
-                selectedTrio.removeAll()
-                
-                }
-        
-            
-            else{
-               
-                cardsInGame[index].isSelected = true
-                print("selected less than 3")
-                
-            }
-        }
-    }
     
     init() {
         newGame()
@@ -97,64 +58,133 @@ struct Set {
         }
     }
     
+    internal mutating func chooseCard(at index: Int)
+    {assert(cardsInGame.indices.contains(index), "Concentration.chooseCard(at: \(index)): Chosen index not valid")
+        
+        if(!cardsInGame[index].isSelected)
+        {
+            
+            selectedTrio.append(cardsInGame[index])
+            
+            if(selectedTrio.count == 3), (checkMatch(selectedTrio))
+            {
+                    
+                cardsInGame[index].isMatched = true
+                
+                selectedTrio.removeAll()
+                
+                score = score + 3
+                
+                print("MATCH")
+                
+                }
+            if selectedTrio.count == 3, !checkMatch(selectedTrio)
+            {
+                cardsInGame[index].isMisMatched = true
+                
+                score = score - 1
+                    
+                selectedTrio.removeAll()
+                
+                 print("mismatch")
+            }
+        
+            else
+            {
+                cardsInGame[index].isSelected = true
+                print("selected less than 3")
+            }
+        }
+    }
+    
     func checkMatch(_ selectedCards : [Card]) -> Bool
     {
-        if selectedCards.count != 3 {
+        if selectedCards.count != 3
+        {
             return false
         }
         
-        if selectedCards[0].color == selectedCards[1].color {
-            if selectedCards[0].color != selectedCards[2].color {
+        if selectedCards[0].color == selectedCards[1].color
+        {
+            if selectedCards[0].color != selectedCards[2].color
+            {
                 return false
             }
-        } else if selectedCards[1].color == selectedCards[2].color {
+        }
+        else if selectedCards[1].color == selectedCards[2].color
+        {
             return false
-        } else if (selectedCards[0].color == selectedCards[2].color) {
+        }
+        else if (selectedCards[0].color == selectedCards[2].color)
+        {
             return false
         }
         
-        if selectedCards[0].number == selectedCards[1].number {
-            if selectedCards[0].number != selectedCards[2].number {
+        if selectedCards[0].number == selectedCards[1].number
+        {
+            if selectedCards[0].number != selectedCards[2].number
+            {
                 return false
             }
-        } else if selectedCards[1].number == selectedCards[2].number {
+        }
+        else if selectedCards[1].number == selectedCards[2].number
+        {
             return false
-        } else if (selectedCards[0].number == selectedCards[2].number) {
+        }
+        else if (selectedCards[0].number == selectedCards[2].number)
+        {
+            return false
+        }
+        if selectedCards[0].shade == selectedCards[1].shade
+        {
+            if selectedCards[0].shade != selectedCards[2].shade
+            {
+                return false
+            }
+        }
+        else if selectedCards[1].shade == selectedCards[2].shade
+        {
+            return false
+        }
+        else if (selectedCards[0].shade == selectedCards[2].shade)
+        {
             return false
         }
         
-        if selectedCards[0].shade == selectedCards[1].shade {
-            if selectedCards[0].shade != selectedCards[2].shade {
+        if selectedCards[0].shape == selectedCards[1].shape
+        {
+            if selectedCards[0].shape != selectedCards[2].shape
+            {
                 return false
             }
-        } else if selectedCards[1].shade == selectedCards[2].shade {
-            return false
-        } else if (selectedCards[0].shade == selectedCards[2].shade) {
+        }
+        else if selectedCards[1].shape == selectedCards[2].shape
+        {
             return false
         }
-        
-        if selectedCards[0].shape == selectedCards[1].shape {
-            if selectedCards[0].shape != selectedCards[2].shape {
-                return false
-            }
-        } else if selectedCards[1].shape == selectedCards[2].shape {
-            return false
-        } else if (selectedCards[0].shape == selectedCards[2].shape) {
+        else if (selectedCards[0].shape == selectedCards[2].shape)
+        {
             return false
         }
         return true
     }
 }
 
-extension Int {
-    var arc4random: Int {
-        if (self > 0) {
+extension Int
+{
+    var arc4random: Int
+    {
+        if (self > 0)
+        {
             return Int(arc4random_uniform(UInt32(self)))
-        } else if (self < 0) {
+        }
+        else if (self < 0)
+        {
             return -Int(arc4random_uniform(UInt32(-self)))
-        } else {
+        }
+        else
+        {
             return 0
         }
     }
 }
-

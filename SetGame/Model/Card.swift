@@ -82,8 +82,12 @@ struct Card
         shape = "■"
         }
         var numOfShape = ""
-        for _ in 1...number{
-            numOfShape += shape    }
+        for _ in 1...number
+        {
+            numOfShape += shape
+            
+        }
+        
     return numOfShape
         
     }
