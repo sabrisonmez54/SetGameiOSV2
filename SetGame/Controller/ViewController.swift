@@ -22,7 +22,6 @@ class ViewController: UIViewController {
         startGameBtn.layer.shadowOffset = CGSize(width: 0, height: 1.0)
         startGameBtn.layer.shadowRadius = 4.0
         
-        
         howToPlayBtn.layer.cornerRadius = 10.0
         howToPlayBtn.layer.shadowColor = UIColor.black.cgColor
         howToPlayBtn.layer.shadowOpacity = 0.5

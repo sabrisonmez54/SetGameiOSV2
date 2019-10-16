@@ -301,12 +301,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match!  +3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Der-Ns-NXC">
+                                <rect key="frame" x="115" y="429" width="184.5" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Der-Ns-NXC" firstAttribute="centerX" secondItem="U6j-lc-EAN" secondAttribute="centerX" id="0Bb-yI-aJ5"/>
                             <constraint firstItem="YSa-h0-EqR" firstAttribute="top" secondItem="Ozv-c9-VGC" secondAttribute="bottom" constant="-74" id="7iw-dg-Raw"/>
                             <constraint firstItem="Ozv-c9-VGC" firstAttribute="leading" secondItem="U6j-lc-EAN" secondAttribute="leading" constant="16" id="S7b-hC-yUi"/>
                             <constraint firstItem="gK8-G4-yZ6" firstAttribute="leading" secondItem="U6j-lc-EAN" secondAttribute="leading" constant="16" id="UTW-wC-GUE"/>
+                            <constraint firstItem="Der-Ns-NXC" firstAttribute="centerY" secondItem="U6j-lc-EAN" secondAttribute="centerY" id="ab4-Ig-VZO"/>
                             <constraint firstItem="gK8-G4-yZ6" firstAttribute="top" secondItem="U6j-lc-EAN" secondAttribute="top" constant="20" id="db8-TV-KlS"/>
                             <constraint firstItem="U6j-lc-EAN" firstAttribute="trailing" secondItem="gK8-G4-yZ6" secondAttribute="trailing" constant="16" id="efR-8a-avZ"/>
                             <constraint firstItem="Ozv-c9-VGC" firstAttribute="top" secondItem="gK8-G4-yZ6" secondAttribute="bottom" constant="300" id="m1f-HJ-sT8"/>
@@ -316,6 +324,7 @@
                     </view>
                     <connections>
                         <outlet property="dealMoreBtn" destination="lso-bW-08A" id="OFF-BT-dQN"/>
+                        <outlet property="matchLabel" destination="Der-Ns-NXC" id="m47-sJ-VNN"/>
                         <outlet property="newGameBtn" destination="pVv-nV-N4D" id="VD8-Yl-gmd"/>
                         <outlet property="scoreLabel" destination="YSa-h0-EqR" id="Sjv-8G-rWb"/>
                         <outletCollection property="cardButtons" destination="akU-g5-Vim" collectionClass="NSMutableArray" id="fkf-iN-JQW"/>
@@ -334,7 +343,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtH-wE-skQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="865" y="100"/>
+            <point key="canvasLocation" x="863.768115942029" y="99.776785714285708"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

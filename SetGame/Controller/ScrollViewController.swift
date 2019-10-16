@@ -14,8 +14,6 @@ class ScrollViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    
-    
     var scrollWidth: CGFloat! = 0.0
     var scrollHeight: CGFloat! = 0.0
     
@@ -53,7 +51,6 @@ class ScrollViewController: UIViewController, UIScrollViewDelegate {
             imageView.frame = CGRect(x:0,y:0,width:300,height:300)
             imageView.contentMode = .scaleAspectFit
             imageView.center = CGPoint(x:scrollWidth/2,y: scrollHeight/2 - 50)
-            
             
             let txt1 = UILabel.init(frame: CGRect(x:32,y:imageView.frame.maxY,width:scrollWidth-64,height:30))
             txt1.textAlignment = .center
@@ -108,7 +105,6 @@ class ScrollViewController: UIViewController, UIScrollViewDelegate {
     }
     
 }
-
 
     /*
     // MARK: - Navigation

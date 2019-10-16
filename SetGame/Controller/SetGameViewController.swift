@@ -8,7 +8,8 @@
 
 import UIKit
 
-class SetGameViewController: UIViewController {
+class SetGameViewController: UIViewController
+{
 
     @IBOutlet weak var newGameBtn: UIButton!
     @IBOutlet weak var dealMoreBtn: UIButton!
@@ -16,14 +17,17 @@ class SetGameViewController: UIViewController {
     var game = Set()
     @IBOutlet private var cardButtons: [UIButton]!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var matchLabel: UILabel!
     
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         setBtns()
     }
     
-    func updateViewFromModel() {
+    func updateViewFromModel()
+    {
        
         scoreLabel.text = "Score: \(game.score)"
     }
@@ -40,6 +44,7 @@ class SetGameViewController: UIViewController {
             button.layer.shadowOffset = CGSize(width: 0, height: 1.0)
             button.layer.shadowRadius = 4.0
             button.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            matchLabel.isHidden = true
         }
     }
     
@@ -47,8 +52,6 @@ class SetGameViewController: UIViewController {
         
         if let cardNumber = cardButtons.firstIndex(of: sender)
         {
-
-            
             game.chooseCard(at: cardNumber)
             
             let button = cardButtons[cardNumber]
@@ -58,39 +61,49 @@ class SetGameViewController: UIViewController {
                 
             if(game.cardsInGame[cardNumber].isMatched){
                 
-                                    button.layer.borderColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
-                                    button.layer.borderWidth = 2
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-                    self.setBtns()
+                button.layer.borderColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+                button.layer.borderWidth = 2
+                self.matchLabel.isHidden = false
+                self.matchLabel.text = "Match! +3"
+                self.matchLabel.textColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.3, execute: {
+                    
                     self.game.cardsInGame[cardNumber].isMatched = false
                     for i in 0..<self.game.cardsInGame.count{
                         self.game.cardsInGame[i].isSelected = false
                     }
+                    self.setBtns()
                 })
-                
             }
+            
             if(game.cardsInGame[cardNumber].isMisMatched){
                 
                     button.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
                     button.layer.borderWidth = 2
+                self.matchLabel.isHidden = false
+                self.matchLabel.text = "Mismatch! -1"
+                self.matchLabel.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-                    self.setBtns()
                     self.game.cardsInGame[cardNumber].isMisMatched = false
                     for i in 0..<self.game.cardsInGame.count{
                         self.game.cardsInGame[i].isSelected = false
                     }
+                    self.setBtns()
                 })
             }
         }
         updateViewFromModel()
     }
     
-    @IBAction func newGameBtnClicked(_ sender: Any) {
+    @IBAction func newGameBtnClicked(_ sender: Any)
+    {
         game.newGame()
         setBtns()
         updateViewFromModel()
     }
-    @IBAction func dealMoreBtnClicked(_ sender: Any) {
+    
+    @IBAction func dealMoreBtnClicked(_ sender: Any)
+    {
         for _ in 1...3{
             let randomIndex = Int.random(in: 0..<game.cardsInGame.count)
             game.cardsInGame.remove(at: randomIndex)
@@ -99,11 +112,12 @@ class SetGameViewController: UIViewController {
         game.addCards(numberOfCardsToAdd: 3)
         
         updateViewFromModel()
+        
         setBtns()
-        if game.cards.count <= 24 {
+        
+        if game.cards.count <= 24
+        {
             dealMoreBtn.isEnabled = false
         }
-       
     }
-   
 }

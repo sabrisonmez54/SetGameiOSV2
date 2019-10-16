@@ -10,13 +10,13 @@ import Foundation
 
 struct Set
 {
-    
     private(set) var cards = [Card]()
     var cardsInGame = [Card]()
     private(set) var selectedTrio = [Card]()
     var score = 0
     
-    init() {
+    init()
+    {
         newGame()
     }
     
@@ -77,7 +77,7 @@ struct Set
                 
                 print("MATCH")
                 
-                }
+            }
             if selectedTrio.count == 3, !checkMatch(selectedTrio)
             {
                 cardsInGame[index].isMisMatched = true
@@ -88,7 +88,6 @@ struct Set
                 
                  print("mismatch")
             }
-        
             else
             {
                 cardsInGame[index].isSelected = true
@@ -103,7 +102,6 @@ struct Set
         {
             return false
         }
-        
         if selectedCards[0].color == selectedCards[1].color
         {
             if selectedCards[0].color != selectedCards[2].color
@@ -119,7 +117,6 @@ struct Set
         {
             return false
         }
-        
         if selectedCards[0].number == selectedCards[1].number
         {
             if selectedCards[0].number != selectedCards[2].number
@@ -150,7 +147,6 @@ struct Set
         {
             return false
         }
-        
         if selectedCards[0].shape == selectedCards[1].shape
         {
             if selectedCards[0].shape != selectedCards[2].shape
