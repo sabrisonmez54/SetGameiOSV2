@@ -11,7 +11,9 @@ import Foundation
 struct Set
 {
     private(set) var cards = [Card]()
+    private(set) var cards2 = [SetCardView]()
     var cardsInGame = [Card]()
+    
     private(set) var selectedTrio = [Card]()
     var score = 0
     
@@ -43,11 +45,15 @@ struct Set
         }
     }
     
+    
     private mutating func addCard()
     {
         let randomInt = Int.random(in: 0..<cards.count)
         let selectedCard = cards.remove(at: randomInt)
+        //let selectedCard2 = cards2.remove(at: randomInt)
+
         cardsInGame.append(selectedCard)
+        //cardsInGame2.append(selectedCard2)
     }
     
     mutating func addCards(numberOfCardsToAdd numberOfCards: Int)
@@ -86,7 +92,7 @@ struct Set
                     
                 selectedTrio.removeAll()
                 
-                 print("mismatch")
+                print("mismatch")
             }
             else
             {

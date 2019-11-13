@@ -19,50 +19,70 @@ class SetGameViewController: UIViewController
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var matchLabel: UILabel!
     
+    @IBOutlet weak var cardContainerView: CardContainerView!
+    
+    
+   
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        setBtns()
+        
+        //setBtns()
+       
+       
+        updateViewFromModel()
+        
     }
+    
+
     
     func updateViewFromModel()
     {
        
-        scoreLabel.text = "Score: \(game.score)"
-    }
-    
-    func setBtns(){
-        for index in cardButtons.indices
-        {
-            let button = cardButtons[index]
-            let card = game.cardsInGame[index]
-            button.setAttributedTitle(card.attributedContents(), for: .normal)
-            button.layer.cornerRadius = 5.0
-            button.layer.shadowColor = UIColor.black.cgColor
-            button.layer.shadowOpacity = 0.2
-            button.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-            button.layer.shadowRadius = 4.0
-            button.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            matchLabel.isHidden = true
-        }
-    }
-    
-    @IBAction private func touchCard(_ sender: UIButton){
         
-        if let cardNumber = cardButtons.firstIndex(of: sender)
+        for view in self.cardContainerView.subviews {
+            view.removeFromSuperview()
+        }
+        for index in game.cardsInGame.indices{
+            let subView = SetCardView()
+            subView.color = game.cardsInGame[index].color
+            subView.count = game.cardsInGame[index].number
+            subView.shade = game.cardsInGame[index].shade
+            subView.shape = game.cardsInGame[index].shape
+            subView.isMatched = game.cardsInGame[index].isMatched
+            subView.isSelected = game.cardsInGame[index].isSelected
+            subView.isMisMatched = game.cardsInGame[index].isMisMatched
+            
+            cardContainerView.addSubview(subView)
+            
+        }
+        for view in self.cardContainerView.subviews {
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(getIndex(_:)))
+            view.addGestureRecognizer(gestureRecognizer)
+        }
+        
+        scoreLabel.text = "Score: \(game.score)"
+        matchLabel.isHidden = true
+    }
+    
+   
+  
+    
+    @objc func getIndex(_ sender: UITapGestureRecognizer) {
+        if let cardNumber = cardContainerView.subviews.firstIndex(of: sender.view!)
         {
             game.chooseCard(at: cardNumber)
+            let view = cardContainerView.subviews[cardNumber]
+            view.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            view.layer.borderWidth = 2
+           // print(cardNumber)
             
-            let button = cardButtons[cardNumber]
-
-                button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-                button.layer.borderWidth = 2
+            if(game.cardsInGame[cardNumber].isMatched)
+            {
                 
-            if(game.cardsInGame[cardNumber].isMatched){
-                
-                button.layer.borderColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
-                button.layer.borderWidth = 2
+                view.layer.borderColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+                view.layer.borderWidth = 2
                 self.matchLabel.isHidden = false
                 self.matchLabel.text = "Match! +3"
                 self.matchLabel.textColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
@@ -72,14 +92,14 @@ class SetGameViewController: UIViewController
                     for i in 0..<self.game.cardsInGame.count{
                         self.game.cardsInGame[i].isSelected = false
                     }
-                    self.setBtns()
+                    self.updateViewFromModel()
                 })
             }
             
             if(game.cardsInGame[cardNumber].isMisMatched){
                 
-                    button.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-                    button.layer.borderWidth = 2
+                view.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+                view.layer.borderWidth = 2
                 self.matchLabel.isHidden = false
                 self.matchLabel.text = "Mismatch! -1"
                 self.matchLabel.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
@@ -88,17 +108,18 @@ class SetGameViewController: UIViewController
                     for i in 0..<self.game.cardsInGame.count{
                         self.game.cardsInGame[i].isSelected = false
                     }
-                    self.setBtns()
+                    self.updateViewFromModel()
                 })
             }
-        }
+        
         updateViewFromModel()
+        }
     }
+      
     
     @IBAction func newGameBtnClicked(_ sender: Any)
     {
         game.newGame()
-        setBtns()
         updateViewFromModel()
     }
     
@@ -113,11 +134,11 @@ class SetGameViewController: UIViewController
         
         updateViewFromModel()
         
-        setBtns()
         
         if game.cards.count <= 24
         {
             dealMoreBtn.isEnabled = false
         }
     }
+    
 }
